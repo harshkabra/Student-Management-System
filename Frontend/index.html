@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="script.js" defer></script>
+
+</head>
+
+
+<body>
+
+
+    <!-- ============================= -->
+    <!-- MAIN HEADING -->
+    <!-- ============================= -->
+
+    <h1>
+        Student Management System
+    </h1>
+
+
+
+    <!-- ============================= -->
+    <!-- MAIN CONTAINER -->
+    <!-- ============================= -->
+
+    <div class="container">
+
+
+        <!-- ============================= -->
+        <!-- ADD STUDENT SECTION -->
+        <!-- ============================= -->
+
+        <div class="add-student-card">
+
+
+            <h2>
+                Add Student
+            </h2>
+
+
+            <form>
+
+
+                <!-- Student ID -->
+
+                <div class="form-group">
+
+                    <label for="studentId">
+                        Student ID
+                    </label>
+
+                    <input
+                        type="number"
+                        id="studentId"
+                        placeholder="Enter student ID"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Student Name -->
+
+                <div class="form-group">
+
+                    <label for="studentName">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studentName"
+                        placeholder="Enter student name"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Student Age -->
+
+                <div class="form-group">
+
+                    <label for="studentAge">
+                        Age
+                    </label>
+
+                    <input
+                        type="number"
+                        id="studentAge"
+                        placeholder="Enter student age"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Student Course -->
+
+                <div class="form-group">
+
+                    <label for="studentCourse">
+                        Course
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studentCourse"
+                        placeholder="Enter course"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Add Button -->
+
+                <button type="submit">
+                    Add Student
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+
+        <!-- ============================= -->
+        <!-- SEARCH STUDENT SECTION -->
+        <!-- ============================= -->
+
+        <div class="search-section">
+
+
+            <h2>
+                Search Student
+            </h2>
+
+
+            <p class="search-description">
+                Enter a Student ID to find student details.
+            </p>
+
+
+            <div class="search-box">
+
+
+                <input
+                    type="number"
+                    id="searchStudentId"
+                    placeholder="Enter Student ID"
+                >
+
+
+                <button
+                    type="button"
+                    onclick="searchStudent()">
+
+                    Search
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="clear-button"
+                    onclick="clearSearch()">
+
+                    Clear
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ============================= -->
+        <!-- SEARCH RESULT -->
+        <!-- ============================= -->
+
+        <div id="searchResult"></div>
+
+
+    </div>
+
+
+
+    <!-- ============================= -->
+    <!-- ALL STUDENTS SECTION -->
+    <!-- ============================= -->
+
+    <div class="students-container">
+
+
+        <div class="students-header">
+
+
+            <div>
+
+                <h2>
+                    All Students
+                </h2>
+
+                <p>
+                    View and manage all registered students.
+                </p>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- STUDENT COUNT -->
+            <!-- ============================= -->
+
+            <div class="student-count">
+
+                Total Students:
+                <span id="studentCount">
+                    0
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ============================= -->
+        <!-- STUDENT TABLE -->
+        <!-- ============================= -->
+
+        <div class="table-wrapper">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Name</th>
+
+                        <th>Age</th>
+
+                        <th>Course</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <tbody>
+
+                    <!-- Student data will be loaded here -->
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+
+        <!-- ============================= -->
+        <!-- EMPTY TABLE MESSAGE -->
+        <!-- ============================= -->
+
+        <div
+            id="emptyStudentsMessage"
+            class="empty-students-message">
+
+            No students found.
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ============================= -->
+    <!-- EDIT STUDENT MODAL -->
+    <!-- ============================= -->
+
+    <div
+        id="editModal"
+        class="modal"
+    >
+
+
+        <div class="modal-content">
+
+
+            <!-- Modal Header -->
+
+            <div class="modal-header">
+
+                <h2>
+                    Edit Student
+                </h2>
+
+                <button
+                    type="button"
+                    class="close-button"
+                    onclick="closeEditModal()">
+
+                    &times;
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Edit Form -->
+
+            <form id="editForm">
+
+
+                <!-- Student ID -->
+
+                <div class="form-group">
+
+                    <label for="editStudentId">
+                        Student ID
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editStudentId"
+                        readonly
+                    >
+
+                </div>
+
+
+
+                <!-- Student Name -->
+
+                <div class="form-group">
+
+                    <label for="editStudentName">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editStudentName"
+                        placeholder="Enter student name"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Student Age -->
+
+                <div class="form-group">
+
+                    <label for="editStudentAge">
+                        Age
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editStudentAge"
+                        placeholder="Enter student age"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Student Course -->
+
+                <div class="form-group">
+
+                    <label for="editStudentCourse">
+                        Course
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editStudentCourse"
+                        placeholder="Enter course"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Modal Buttons -->
+
+                <div class="modal-buttons">
+
+
+                    <button
+                        type="submit"
+                        class="update-button">
+
+                        Update Student
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cancel-button"
+                        onclick="closeEditModal()">
+
+                        Cancel
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
